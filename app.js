@@ -19,7 +19,6 @@ jsdom.env(
   function (err, window) {
     var $ = window.jQuery;
     console.log($('article').get( 0 ).children('h2').text());
-    console.log('Error:' err);
   }
 );
 
