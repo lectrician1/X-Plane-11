@@ -18,7 +18,7 @@ jsdom.env(
   ["https://code.jquery.com/jquery-3.3.1.min.js"],
   function (err, window) {
     var $ = window.jQuery;
-    console.log($('article').get( 0 ));
+    console.log($('article').get( 0 ).innerHTML);
   }
 );
 
