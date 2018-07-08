@@ -14,7 +14,7 @@ client.on('message', msg => {
 });
 
 jsdom.env(
-  "https://iojs.org/dist/",
+  "https://www.x-plane.com/blog/",
   ["https://code.jquery.com/jquery-3.3.1.min.js"],
   function (err, window) {
     var $ = window.jQuery;
