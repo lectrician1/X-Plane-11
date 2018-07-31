@@ -12,7 +12,7 @@ client.on('message', msg => {
   var msgMatch = msg.content.match(/\([^()]*\)|[^.]+(?=\([^()]*\))|[^.]+/g);
   if (msgMatch[0] === 'XP') {
     if (msgMatch[1] === 'site') {
-      if (msgMatch[2] === '(blog)') {
+      if (msgMatch[2] === 'blog') {
         jsdom.env(
           "https://www.x-plane.com/blog/",
           ["https://code.jquery.com/jquery-3.3.1.min.js"],
