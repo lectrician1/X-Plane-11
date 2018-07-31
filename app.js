@@ -43,10 +43,11 @@ client.on('message', msg => {
       }
     }
     else if (msgMatch[1] === 'help') {
-      msg.reply('View our current commands at ');
+      msg.reply('View our current commands at https://docs.google.com/spreadsheets/d/1jYaT-wTee34skK6t5ZNvOKdhtRBiUn0yMPVpodmcajg/edit?usp=sharing');
     }
-    else if (msgMatch[1] === 'bot') {
-      
+    else if (msgMatch[1] === 'github') {
+      msg.reply('https://github.com/lectrician1/X-Plane-11')
+    }
   }
 });
 
