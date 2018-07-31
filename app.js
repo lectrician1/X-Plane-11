@@ -2,10 +2,26 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const request = require('request');
 const jsdom = require("jsdom/lib/old-api.js");
+const http = require('http');
 const port = process.env.PORT;
+
+const requestHandler = (request, response) => {
+  console.log(request.url);
+  response.end('server requested');
+}
+
+const server = http.createServer(requestHandler);
+
+server.listen(port, (err) => {
+  if (err) {
+    return console.log('something bad happened', err)
+  }
+  console.log(`server is listening on ${port}`);
+});
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity('Help: XP.help');
 });
 
 client.on('message', msg => {
@@ -27,8 +43,10 @@ client.on('message', msg => {
       }
     }
     else if (msgMatch[1] === 'help') {
-      msg.reply('The only commands currently are XP.site and XP.site(blog)');
+      msg.reply('View our current commands at ');
     }
+    else if (msgMatch[1] === 'bot') {
+      
   }
 });
 
