@@ -18,7 +18,7 @@ jsdom.env(
   ["https://code.jquery.com/jquery-3.3.1.min.js"],
   function (err, window) {
     var $ = window.jQuery;
-    console.log($('article').get( 0 ).children('h2').children('a').text());
+    console.log($('article').first().children('h2').first().children('a').first().attr('href'));
   }
 );
 
