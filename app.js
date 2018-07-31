@@ -9,17 +9,15 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (msg.content === 'XP blog') {
-    msg.reply('This feature is currently in development.');
+    jsdom.env(
+      "https://www.x-plane.com/blog/",
+      ["https://code.jquery.com/jquery-3.3.1.min.js"],
+      function (err, window) {
+        var $ = window.jQuery;
+        msg.reply($('article').first().children('h2').first().children('a').first().attr('href'));
+      }
+    );
   }
 });
-
-jsdom.env(
-  "https://www.x-plane.com/blog/",
-  ["https://code.jquery.com/jquery-3.3.1.min.js"],
-  function (err, window) {
-    var $ = window.jQuery;
-    console.log($('article').first().children('h2').first().children('a').first().attr('href'));
-  }
-);
 
 client.login(process.env.token);
