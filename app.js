@@ -39,7 +39,7 @@ client.on('message', msg => {
           }
         );
       }
-      else if (msgMatch[2].beginsWith('(') && msgMatch[2].endsWith(')')) msg.reply('That is not an availible selector of \`site\`');
+      else if (msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('That is not an availible selector of \`site\`');
       else msg.reply('That is not an availible property of \`site\`');
     }
     else if (msgMatch[1] === 'help') {
@@ -48,7 +48,7 @@ client.on('message', msg => {
     else if (msgMatch[1] === 'github') {
       msg.reply('https://github.com/lectrician1/X-Plane-11')
     }
-    else if (msgMatch[1].beginsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector of \`XP\`');
+    else if (msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector of \`XP\`');
     else if (msgMatch[1].length > 0) msg.reply('That is not an availible property of \`XP\`');
   }
 });
