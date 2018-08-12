@@ -28,7 +28,8 @@ client.on('message', msg => {
   var msgMatch = msg.content.match(/\([^()]*\)|[^.]+(?=\([^()]*\))|[^.]+/g);
   if (msgMatch[0] === 'XP') {
     if (msgMatch[1] === 'site') {
-      if (msgMatch[2] === '(blog)') {
+      if (msgMatch[2].length === 0) msg.reply('https://x-plane.com');
+      else if (msgMatch[2] === '(blog)') {
         jsdom.env(
           "https://www.x-plane.com/blog/",
           ["https://code.jquery.com/jquery-3.3.1.min.js"],
@@ -38,9 +39,8 @@ client.on('message', msg => {
           }
         );
       }
-      else {
-        msg.reply('https://x-plane.com');
-      }
+      else if (msgMatch[2].beginsWith('(') && msgMatch[2].endsWith(')') msg.reply('That is not an availible selector of \`site\`');
+      else msg.reply('That is not an availible property of \`site\`');
     }
     else if (msgMatch[1] === 'help') {
       msg.reply('View our current commands at https://docs.google.com/spreadsheets/d/1jYaT-wTee34skK6t5ZNvOKdhtRBiUn0yMPVpodmcajg/edit?usp=sharing');
@@ -48,6 +48,8 @@ client.on('message', msg => {
     else if (msgMatch[1] === 'github') {
       msg.reply('https://github.com/lectrician1/X-Plane-11')
     }
+    else if (msgMatch[1].beginsWith('(') && msgMatch[2].endsWith(')') msg.reply('That is not an availible selector of \`XP\`');
+    else if (msgMatch[2].length > 0) msg.reply('That is not an availible property of \`XP\`');
   }
 });
 
