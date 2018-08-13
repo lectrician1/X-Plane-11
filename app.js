@@ -39,8 +39,8 @@ client.on('message', msg => {
           }
         );
       }
-      else if (msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('That is not an availible selector of \`site\`');
-      else msg.reply('That is not an availible property of \`site\`');
+      else if (msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('That is not an availible selector for \`site\`');
+      else msg.reply('That is not an availible property for \`site\`');
     }
     else if (msgMatch[1] === 'help') {
       msg.reply('View our current commands at https://docs.google.com/spreadsheets/d/1jYaT-wTee34skK6t5ZNvOKdhtRBiUn0yMPVpodmcajg/edit?usp=sharing');
@@ -48,8 +48,14 @@ client.on('message', msg => {
     else if (msgMatch[1] === 'github') {
       msg.reply('https://github.com/lectrician1/X-Plane-11')
     }
-    else if (msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector of \`XP\`');
-    else if (msgMatch[1].length > 0) msg.reply('That is not an availible property of \`XP\`');
+    else if (msgMatch[1] === 'add' || msgMatch[1] === 'give' || msgMatch[1] === 'get') {
+      if (msgMatch[2].length === 0) msg.reply('The only availible property for \`add\` is \`role\`');
+      else if (msgMatch[2] === 'role' || msgMatch[2] === 'roles') {
+        if (msgMatch[2].length === 0) msg.reply('Plese spell the names of the roles you would like to get.');
+        else if (msgMatch[2] === '
+        
+    else if (msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector for \`XP\`');
+    else if (msgMatch[1].length > 0) msg.reply('That is not an availible property for \`XP\`');
   }
 });
 
