@@ -25,39 +25,45 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  var msgMatch = msg.content.match(/\([^()]*\)|[^.]+(?=\([^()]*\))|[^.]+/g);
-  if (msgMatch[0] === 'XP') {
-    if (msgMatch[1] === 'site') {
-      if (msgMatch[2].length === 0) msg.reply('https://x-plane.com');
-      else if (msgMatch[2] === '(blog)') {
-        jsdom.env(
-          "https://www.x-plane.com/blog/",
-          ["https://code.jquery.com/jquery-3.3.1.min.js"],
-          function (err, window) {
-            var $ = window.jQuery;
-            msg.reply($('article').first().children('h2').first().children('a').first().attr('href'));
+  if (msg.channel.id === '515579111939375114') {
+    var msgMatch = msg.content.match(/\([^()]*\)|[^.]+(?=\([^()]*\))|[^.]+/g);
+    if (msgMatch[0] === 'XP') {
+      if (msgMatch[1] === 'site') {
+        if (msgMatch[2].length === 0) msg.reply('https://x-plane.com');
+        else if (msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) {
+          if (msgMatch[2] === '(blog)') {
+            jsdom.env(
+              "https://www.x-plane.com/blog/",
+              ["https://code.jquery.com/jquery-3.3.1.min.js"],
+              function (err, window) {
+                var $ = window.jQuery;
+                msg.reply($('article').first().children('h2').first().children('a').first().attr('href'));
+              }
+            );
           }
-        );
+          else msg.reply('The only availible selector of \`site\` is \`blog\`');
+        }
+        else msg.reply('There are no properties of \`site\`');
       }
-      else if (msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('That is not an availible selector for \`site\`');
-      else msg.reply('That is not an availible property for \`site\`');
+      else if (msgMatch[1] === 'help') {
+        msg.reply('View our current commands at https://docs.google.com/spreadsheets/d/1jYaT-wTee34skK6t5ZNvOKdhtRBiUn0yMPVpodmcajg/edit?usp=sharing');
+      }
+      else if (msgMatch[1] === 'github') {
+        msg.reply('https://github.com/lectrician1/X-Plane-11')
+      }
+      else if (msgMatch[1] === 'add') {
+        if (msgMatch[2] === 'role')
+          if (msgMatch[3].startsWith('(') && msgMatch[1].endsWith(')')) {
+            
+          else if (msgMatch[3].length === 0) msg.reply('There are no properties of \`role\`');
+          else {
+            msg.reply('What role would you like to have?')
+              if 
+        else msg.reply('The only availible property for \`add\` is \`role(s)\`');
+
+      else if (msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector for \`XP\`');
+      else if (msgMatch[1].length > 0) msg.reply('That is not an availible property for \`XP\`');
     }
-    else if (msgMatch[1] === 'help') {
-      msg.reply('View our current commands at https://docs.google.com/spreadsheets/d/1jYaT-wTee34skK6t5ZNvOKdhtRBiUn0yMPVpodmcajg/edit?usp=sharing');
-    }
-    else if (msgMatch[1] === 'github') {
-      msg.reply('https://github.com/lectrician1/X-Plane-11')
-    }
-    else if (msgMatch[1] === 'add') {
-      if (msgMatch[2].length === 0) msg.reply('The only availible property for \`add\` is \`role(s)\`');
-      else if (msgMatch[2] === 'role' || msgMatch[2] === 'roles') {
-        if (msgMatch[2].length === 0) msg.reply('Plese spell the names of the roles you would like to get.');
-        else if (msgMatch[2] === 'role')
-          if (msgMatch[3].startsWith('(') && msgMatch[1].endsWith(')'))
-            if 
-        
-    else if (msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector for \`XP\`');
-    else if (msgMatch[1].length > 0) msg.reply('That is not an availible property for \`XP\`');
   }
 });
 
