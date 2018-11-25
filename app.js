@@ -58,10 +58,10 @@ client.on('message', msg => {
       }
       else if (msgMatch[1] === 'add') {
         var rolesA = [
-          ['youtubers', 515266870085943297],
-          ['twitch streamers', 515266914746892290],
-          ['professional developers', 515267013745180697],
-          ['developers', 515573304602656836]
+          ['youtubers', '515266870085943297'],
+          ['twitch streamers', '515266914746892290'],
+          ['professional developers', '515267013745180697'],
+          ['developers', '515573304602656836']
         ];
         let roles = new Map(rolesA);
         if (msgMatch[2] === 'role') {
