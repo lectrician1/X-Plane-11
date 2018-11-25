@@ -88,7 +88,7 @@ client.on('message', msg => {
               }
             });
           }
-          else if (msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
+          else if (typeof msgMatch[3] !== 'undefined' && msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
             var request = roles.indexOf(msgMatch[3].slice(1, -1))
             if (request > -1) {
               msg.member.addRole(roles.get(request))
@@ -100,7 +100,7 @@ client.on('message', msg => {
         }
         else if (msg.content.startsWith('XP.add.')) msg.reply('The only availible property for \`add\` is \`role\`');
         else if (typeof msgMatch[2] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('There are no selectors for \`add\`');
-        else msg.reply('You must use the property \`role(s)\`for \`add\`');
+        else msg.reply('You must use the property \`role\`for \`add\`');
       }
       else if (msg.content.startsWith('XP.')) msg.reply('That is not an availible property for \`XP\`');
       else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`XP\`');
