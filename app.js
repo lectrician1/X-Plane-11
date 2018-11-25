@@ -29,7 +29,8 @@ client.on('message', msg => {
     var msgMatch = msg.content.match(/\([^()]*\)|[^.]+(?=\([^()]*\))|[^.]+/g);
     if (msgMatch[0] === 'XP') {
       if (msgMatch[1] === 'site') {
-        if (msgMatch[2].length === 0) msg.reply('https://x-plane.com');
+        if (msg.content.startsWith('XP.site.')) msg.reply('There are no properties for \`site\`');
+        else if (typeof msgMatch[2] === 'undefined') msg.reply('https://x-plane.com');
         else if (msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) {
           if (msgMatch[2] === '(blog)') {
             jsdom.env(
