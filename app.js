@@ -12,6 +12,14 @@ const requestHandler = (request, response) => {
 
 const server = http.createServer(requestHandler);
 
+function titleCase(str) {
+  str = str.toLowerCase().split(' ');
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+  }
+  return str.join(' ');
+}
+
 server.listen(port, (err) => {
   if (err) {
     return console.log('something bad happened', err)
@@ -49,7 +57,7 @@ client.on('message', msg => {
       else if (msgMatch[1] === 'help') {
         if (msg.content.startsWith('XP.help.')) msg.reply('That is not an availible property for \`help\`');
         else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`help\`');
-        else msg.reply('View our current commands at https://docs.google.com/spreadsheets/d/1jYaT-wTee34skK6t5ZNvOKdhtRBiUn0yMPVpodmcajg/edit?usp=sharing');
+        else msg.reply('Try \`XP.\`');
       }
       else if (msgMatch[1] === 'github') {
         if (msg.content.startsWith('XP.github.')) msg.reply('That is not an availible property for \`github\`');
@@ -68,14 +76,6 @@ client.on('message', msg => {
           if (msg.content.startsWith('XP.add.role.')) msg.reply('There are no properties for \`role\`');
           else if (typeof msgMatch[3] === 'undefined') {
             msg.reply('What role would you like to have?');
-            
-            function titleCase(str) {
-              str = str.toLowerCase().split(' ');
-              for (var i = 0; i < str.length; i++) {
-                str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
-              }
-              return str.join(' ');
-            }
             
             const filter = m => m.author.id !== '464952410280951819';
             const collector = msg.channel.createMessageCollector(filter, { max: 3 });
@@ -102,6 +102,7 @@ client.on('message', msg => {
             if (msgMatch[3].length > 2) {
               if (roles.has(msgMatch[3].slice(1, -1))) {
                 msg.member.addRole(roles.get(msgMatch[3].slice(1, -1)))
+                msg.reply(titleCase('The role ' + msgMatch[3].slice(1, -1)) + ' has been added to your user!')
               }
               else {
                 msg.reply('That role doesn\'t exist.')
@@ -114,7 +115,7 @@ client.on('message', msg => {
         else if (typeof msgMatch[2] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('There are no selectors for \`add\`');
         else msg.reply('You must use the property \`role\`for \`add\`');
       }
-      else if (msg.content.startsWith('XP.')) msg.reply('That is not an availible property for \`XP\`');
+      else if (msg.content.startsWith('XP.')) msg.reply('The availible properties for \`XP\` are \`site\`, \`help\`, \`github\`, and \`add\`');
       else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`XP\`');
     }
   }
