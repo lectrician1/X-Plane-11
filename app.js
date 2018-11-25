@@ -73,7 +73,7 @@ client.on('message', msg => {
           else {
             msg.reply('What role would you like to have?');
             
-            const filter = m => ;
+            const filter = m => {};
             const collector = msg.channel.createMessageCollector(filter, { max: 1 });
             collector.on('collect', c => {
               if (c !== 'stop') {
