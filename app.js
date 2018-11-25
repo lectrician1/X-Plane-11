@@ -73,7 +73,7 @@ client.on('message', msg => {
             const collector = msg.channel.createMessageCollector(filter, { max: 3 });
             collector.on('collect', c => {
               if (c.content !== 'stop') {
-                if (roles.indexOf(c.content) > -1) {
+                if (roles.has(c.content)) {
                   msg.member.addRole(roles.get(c.content));
                 }
                 else {
