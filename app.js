@@ -69,7 +69,7 @@ client.on('message', msg => {
           else if (typeof msgMatch[3] === 'undefined') {
             msg.reply('What role would you like to have?');
             
-            const filter = () => true;
+            const filter = m => m.author.bot;
             const collector = msg.channel.createMessageCollector(filter, { max: 3 });
             collector.on('collect', c => {
               if (c.content !== 'stop') {
