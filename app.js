@@ -66,7 +66,7 @@ client.on('message', msg => {
         let roles = new Map(rolesA);
         if (msgMatch[2] === 'role') {
           if (msg.content.startsWith('XP.add.role.')) msg.reply('There are no properties for \`role\`');
-          else if (typeof msgMatch[3] !== 'undefined') {
+          else if (typeof msgMatch[3] === 'undefined') {
             msg.reply('What role would you like to have?');
             
             const filter = m => {};
@@ -89,13 +89,16 @@ client.on('message', msg => {
             });
           }
           else if (typeof msgMatch[3] !== 'undefined' && msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
-            var request = roles.indexOf(msgMatch[3].slice(1, -1))
-            if (request > -1) {
-              msg.member.addRole(roles.get(request))
+            if (msgMatch[3].length() > 2) {
+              var request = roles.indexOf(msgMatch[3].slice(1, -1))
+              if (request > -1) {
+                msg.member.addRole(roles.get(request))
+              }
+              else {
+                msg.reply('That role doesn\'t exist.')
+              }
             }
-            else {
-              msg.reply('That role doesn\'t exist.')
-            }
+            else msg.reply('Please provide a role you would like to give yourself.')
           }
         }
         else if (msg.content.startsWith('XP.add.')) msg.reply('The only availible property for \`add\` is \`role\`');
