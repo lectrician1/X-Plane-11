@@ -99,7 +99,7 @@ client.on('message', msg => {
             });
           }
           else if (typeof msgMatch[3] !== 'undefined' && msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
-            if (msgMatch[3].length() > 2) {
+            if (msgMatch[3].length > 2) {
               if (roles.has(msgMatch[3].slice(1, -1))) {
                 msg.member.addRole(roles.get(msgMatch[3].slice(1, -1)))
               }
