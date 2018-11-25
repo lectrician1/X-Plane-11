@@ -77,7 +77,7 @@ client.on('message', msg => {
                   msg.member.addRole(roles.get(c.content));
                 }
                 else {
-                  if (collector.collected.length() !== 3) {
+                  if (collector.collected.size() !== 3) {
                     msg.reply('That role doesn\'t exist. Please type in another one or \`stop\` to stop asking.');
                   }
                   else msg.reply('That role doesn\'t exist. Please retype the command to start over.');
