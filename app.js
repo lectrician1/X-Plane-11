@@ -69,7 +69,7 @@ client.on('message', msg => {
               msg.reply('That role doesn\'t exist.')
             }
           }
-          else if (msgMatch[3].length === 0) msg.reply('There are no properties of \`role\`');
+          else if (msgMatch[3] === 'undefined') msg.reply('There are no properties of \`role\`');
           else {
             msg.reply('What role would you like to have?');
             
@@ -92,7 +92,7 @@ client.on('message', msg => {
         }
         else msg.reply('The only availible property for \`add\` is \`role(s)\`');
       }
-      else if (msgMatch[1].length > 0) msg.reply('That is not an availible property for \`XP\`');
+      else if (msgMatch[1] === 'undefined') msg.reply('That is not an availible property for \`XP\`');
       else if (msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector for \`XP\`');
     }
   }
