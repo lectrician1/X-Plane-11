@@ -72,15 +72,15 @@ client.on('message', msg => {
             const filter = () => true;
             const collector = msg.channel.createMessageCollector(filter, { max: 3 });
             collector.on('collect', c => {
-              if (c !== 'stop') {
-                if (roles.indexOf(c) > -1) {
-                  msg.member.addRole(roles.get(c))
+              if (c.content !== 'stop') {
+                if (roles.indexOf(c.content) > -1) {
+                  msg.member.addRole(roles.get(c.content));
                 }
                 else {
                   if (collector.collected.length() !== 3) {
-                    msg.reply('That role doesn\'t exist. Please type in another one or \`stop\` to stop asking.')
+                    msg.reply('That role doesn\'t exist. Please type in another one or \`stop\` to stop asking.');
                   }
-                  else msg.reply('That role doesn\'t exist. Please retype the command to start over.')
+                  else msg.reply('That role doesn\'t exist. Please retype the command to start over.');
                 }
               }
               else {
