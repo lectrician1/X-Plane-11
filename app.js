@@ -73,8 +73,10 @@ client.on('message', msg => {
             const collector = msg.channel.createMessageCollector(filter, { max: 3 });
             collector.on('collect', c => {
               if (c.content !== 'stop') {
-                if (roles.has(c.content)) {
-                  msg.member.addRole(roles.get(c.content));
+                if (roles.has(c.content.toLowerCase())) {
+                  msg.member.addRole(roles.get(c.content.toLowerCase()));
+                  msg.reply('The role ' + c.content.charAt(0).toUpperCase() + ' has been added to your user!');
+                  collector.stop();
                 }
                 else {
                   if (collector.collected.size !== 3) {
