@@ -65,7 +65,30 @@ client.on('message', msg => {
         ];
         let roles = new Map(rolesA);
         if (msgMatch[2] === 'role') {
-          if (msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
+          if (msg.content.startsWith('XP.add.role.')) msg.reply('There are no properties for \`role\`');
+          else if (typeof msgMatch[3] !== 'undefined') {
+            msg.reply('What role would you like to have?');
+            
+            const filter = m => {};
+            const collector = msg.channel.createMessageCollector(filter, { max: 3 });
+            collector.on('collect', c => {
+              if (c !== 'stop') {
+                if (roles.indexOf(c) > -1) {
+                  msg.member.addRole(roles.get(c))
+                }
+                else {
+                  if (collector.collected.length() !== 3) {
+                    msg.reply('That role doesn\'t exist. Please type in another one or \`stop\` to stop asking.')
+                  }
+                  else msg.reply('That role doesn\'t exist. Please retype the command to start over.')
+                }
+              }
+              else {
+                collector.stop()
+              }
+            });
+          }
+          else if (msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
             var request = roles.indexOf(msgMatch[3].slice(1, -1))
             if (request > -1) {
               msg.member.addRole(roles.get(request))
@@ -74,28 +97,8 @@ client.on('message', msg => {
               msg.reply('That role doesn\'t exist.')
             }
           }
-          else if (msgMatch[3] === 'undefined') msg.reply('There are no properties of \`role\`');
-          else {
-            msg.reply('What role would you like to have?');
-            
-            const filter = m => {};
-            const collector = msg.channel.createMessageCollector(filter, { max: 1 });
-            collector.on('collect', c => {
-              if (c !== 'stop') {
-                if (roles.indexOf(c.values()) > -1) {
-                  msg.member.addRole(roles.get(c.values()))
-                }
-                else {
-                  msg.reply('That role doesn\'t exist. Please type in another one or \`stop\` to stop asking.')
-                }
-              }
-              else {
-                collector.stop()
-              }
-            });
-          }
         }
-        else if (msg.content.startsWith('XP.add.')) msg.reply('The only availible property for \`add\` is \`role(s)\`');
+        else if (msg.content.startsWith('XP.add.')) msg.reply('The only availible property for \`add\` is \`role\`');
         else if (typeof msgMatch[2] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('There are no selectors for \`add\`');
         else msg.reply('You must use the property \`role(s)\`for \`add\`');
       }
