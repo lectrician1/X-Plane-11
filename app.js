@@ -47,10 +47,14 @@ client.on('message', msg => {
         else msg.reply('There are no properties of \`site\`');
       }
       else if (msgMatch[1] === 'help') {
-        msg.reply('View our current commands at https://docs.google.com/spreadsheets/d/1jYaT-wTee34skK6t5ZNvOKdhtRBiUn0yMPVpodmcajg/edit?usp=sharing');
+        if (msg.content.startsWith('XP.help.')) msg.reply('That is not an availible property for \`help\`');
+        else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`help\`');
+        else msg.reply('View our current commands at https://docs.google.com/spreadsheets/d/1jYaT-wTee34skK6t5ZNvOKdhtRBiUn0yMPVpodmcajg/edit?usp=sharing');
       }
       else if (msgMatch[1] === 'github') {
-        msg.reply('https://github.com/lectrician1/X-Plane-11')
+        if (msg.content.startsWith('XP.github.')) msg.reply('That is not an availible property for \`github\`');
+        else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`github\`');
+        else msg.reply('https://github.com/lectrician1/X-Plane-11')
       }
       else if (msgMatch[1] === 'add') {
         var rolesA = [
@@ -91,10 +95,12 @@ client.on('message', msg => {
             });
           }
         }
-        else msg.reply('The only availible property for \`add\` is \`role(s)\`');
+        else if (msg.content.startsWith('XP.add.')) msg.reply('The only availible property for \`add\` is \`role(s)\`');
+        else if (typeof msgMatch[2] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('There are no selectors for \`add\`');
+        else msg.reply('You must use the property \`role(s)\`for \`add\`');
       }
       else if (msg.content.startsWith('XP.')) msg.reply('That is not an availible property for \`XP\`');
-      else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector for \`XP\`');
+      else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`XP\`');
     }
   }
 });
