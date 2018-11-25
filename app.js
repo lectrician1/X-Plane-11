@@ -52,13 +52,44 @@ client.on('message', msg => {
         msg.reply('https://github.com/lectrician1/X-Plane-11')
       }
       else if (msgMatch[1] === 'add') {
-        if (msgMatch[2] === 'role')
-          if (msgMatch[3].startsWith('(') && msgMatch[1].endsWith(')')) {
-            
+        var rolesA = [
+          ['youtubers', 515266870085943297],
+          ['twitch streamers', 515266914746892290],
+          ['professional developers', 515267013745180697],
+          ['developers', 515573304602656836]
+        ];
+        let roles = new Map(rolesA);
+        if (msgMatch[2] === 'role') {
+          if (msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
+            var request = roles.indexOf(msgMatch[3].slice(1, -1))
+            if (request > -1) {
+              msg.member.addRole(roles.get(request))
+            }
+            else {
+              msg.reply('That role doesn\'t exist.')
+            }
+          }
           else if (msgMatch[3].length === 0) msg.reply('There are no properties of \`role\`');
           else {
-            msg.reply('What role would you like to have?')
-              if 
+            msg.reply('What role would you like to have?');
+            
+            const filter = m => ;
+            const collector = msg.channel.createMessageCollector(filter, { max: 1 });
+            collector.on('collect', c => {
+              if (c !== 'stop') {
+                if (roles.indexOf(c.values()) > -1) {
+                  msg.member.addRole(roles.get(c.values()))
+                }
+                else {
+                  msg.reply('That role doesn\'t exist. Please type in another one or \`stop\` to stop asking.')
+                }
+              }
+              else {
+                collector.stop()
+              }
+            });
+          }
+        }
         else msg.reply('The only availible property for \`add\` is \`role(s)\`');
 
       else if (msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector for \`XP\`');
