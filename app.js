@@ -93,7 +93,7 @@ client.on('message', msg => {
         else msg.reply('The only availible property for \`add\` is \`role(s)\`');
       }
       else if (msg.content.startsWith('XP.')) msg.reply('That is not an availible property for \`XP\`');
-      else if (typeof msgMatch[1] === 'defined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector for \`XP\`');
+      else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('That is not an availible selector for \`XP\`');
     }
   }
 });
