@@ -69,13 +69,21 @@ client.on('message', msg => {
           else if (typeof msgMatch[3] === 'undefined') {
             msg.reply('What role would you like to have?');
             
+            function titleCase(str) {
+              str = str.toLowerCase().split(' ');
+              for (var i = 0; i < str.length; i++) {
+                str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+              }
+              return str.join(' ');
+            }
+            
             const filter = m => m.author.id !== '464952410280951819';
             const collector = msg.channel.createMessageCollector(filter, { max: 3 });
             collector.on('collect', c => {
               if (c.content !== 'stop') {
                 if (roles.has(c.content.toLowerCase())) {
                   msg.member.addRole(roles.get(c.content.toLowerCase()));
-                  msg.reply('The role ' + c.content.charAt(0).toUpperCase() + ' has been added to your user!');
+                  msg.reply('The role ' + titleCase(c.content) + ' has been added to your user!');
                   collector.stop();
                 }
                 else {
@@ -92,9 +100,8 @@ client.on('message', msg => {
           }
           else if (typeof msgMatch[3] !== 'undefined' && msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
             if (msgMatch[3].length() > 2) {
-              var request = roles.indexOf(msgMatch[3].slice(1, -1))
-              if (request > -1) {
-                msg.member.addRole(roles.get(request))
+              if (roles.has(msgMatch[3].slice(1, -1))) {
+                msg.member.addRole(roles.get(msgMatch[3].slice(1, -1)))
               }
               else {
                 msg.reply('That role doesn\'t exist.')
