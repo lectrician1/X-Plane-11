@@ -112,7 +112,7 @@ client.on('message', msg => {
           }
         }
         else if (msg.content.startsWith('XP.add.')) msg.reply('The only availible property for \`add\` is \`role\`');
-        else if (typeof msgMatch[2] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('There are no selectors for \`add\`');
+        else if (typeof msgMatch[2] !== 'undefined' && msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('There are no selectors for \`add\`');
         else msg.reply('You must use the property \`role\`for \`add\`');
       }
       else if (msg.content.startsWith('XP.')) msg.reply('The availible properties for \`XP\` are \`site\`, \`help\`, \`github\`, and \`add\`');
