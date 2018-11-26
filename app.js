@@ -119,6 +119,11 @@ client.on('message', msg => {
       else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`XP\`');
     }
   }
+  else if (msg.channel.id === '515265124253040641' || msg.channel.id === '515265169581015061') {
+    if (typeof msg.attachments !== 'undefined' || typeof msg.embeds !== 'undefined') {
+      msg.react(':thumbsup:')
+        .catch(console.error);
+    }
 });
 
 client.login(process.env.token);
