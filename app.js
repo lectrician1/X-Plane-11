@@ -120,7 +120,7 @@ client.on('message', msg => {
     }
   }
   else if ((msg.channel.id === '515265124253040641' || msg.channel.id === '515265169581015061') && (typeof msg.attachments !== 'undefined' || typeof msg.embeds !== 'undefined')) {
-    msg.react(':thumbsup:')
+    msg.react('👍')
       .catch(console.error);
   }
 });
