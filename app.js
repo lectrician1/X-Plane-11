@@ -107,8 +107,8 @@ client.on('message', msg => {
           else if (typeof msgMatch[3] !== 'undefined' && msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
             if (msgMatch[3].length > 2) {
               if (roles.has(msgMatch[3].slice(1, -1))) {
-                msg.member.addRole(roles.get(msgMatch[3].slice(1, -1).toLowerCase()))
-                msg.reply('The role ' + titleCase(msgMatch[3].slice(1, -1))) + ' has been added to your user!')
+                msg.member.addRole(roles.get(msgMatch[3].slice(1, -1).toLowerCase()));
+                msg.reply('The role ' + titleCase(msgMatch[3].slice(1, -1)) + ' has been added to your user!');
               }
               else {
                 msg.reply('That role doesn\'t exist.')
