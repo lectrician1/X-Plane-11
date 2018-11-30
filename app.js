@@ -37,8 +37,7 @@ client.on('message', msg => {
     var msgMatch = msg.content.match(/\([^()]*\)|[^.]+(?=\([^()]*\))|[^.]+/g);
     if (msgMatch[0] === 'XP') {
       if (msgMatch[1] === 'site') {
-        if (msg.content.startsWith('XP.site.')) msg.reply('There are no properties for \`site\`');
-        else if (typeof msgMatch[2] === 'undefined') msg.reply('https://x-plane.com');
+        if (msg.content.startsWith('XP.site.')) msg.reply('There are no properties for \`site\`.');
         else if (msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) {
           if (msgMatch[2] === '(blog)') {
             jsdom.env(
@@ -50,18 +49,25 @@ client.on('message', msg => {
               }
             );
           }
-          else msg.reply('The only availible selector of \`site\` is \`blog\`');
+          else msg.reply('The only availible method of \`site\` is \`blog\`');
         }
-        else msg.reply('There are no properties of \`site\`');
+        else msg.reply('https://x-plane.com');
       }
       else if (msgMatch[1] === 'help') {
-        if (msg.content.startsWith('XP.help.')) msg.reply('That is not an availible property for \`help\`');
-        else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`help\`');
-        else msg.reply('Try \`XP.\`');
+        if (msgMatch[2] === 'examples') {
+          if (msg.content.startsWith('XP.help.examples.')) msg.reply('There are no properties for \`examples\`');
+          else if (typeof msgMatch[3] !== 'undefined' && msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) msg.reply('There are no methods for \`examples\`');
+          else {
+            msg.reply('\n\n**An example** of a command that would add a role to your user would be: \`XP.add.role\`. This command has the properties \`.add\` - which is a property of \`XP\` that allows you to add various things to your user, and \`role\` - which is a property of \`.add\` that adds a role to your user. I will then ask you what role you would like to have and then give it to you. As you can see, properties are seperated by periods. \nNow a faster way to do this would be to include \`.role\`\'s method. This command would look like this: \`XP.add.role(*role*)\`. Just like before, \`add\` and \`role\` are properties, but this time, you take advantage of \`.role\`\'s method. As you can see, methods are indicated by parentheses.');
+          }
+        }
+        else if (msg.content.startsWith('XP.help.')) msg.reply('The only availible property for \`help\` is \`examples\`.');
+        else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no methods for \`help\`');
+        else msg.reply('**Hi!** :xp: I work in a system of properties and methods. The base property for me is \`XP\`. \n\nYou can find out **properties** of properties by typing the the \`.*\` property after the property you are looking for (e.g XP.* will give you all of the properties of \`XP\`. \nYou can find out **methods** of properties by indicating a method with no selectors ( \`()\` ) after the property you are looking for (e.g XP.() will give you all of the methods of \`XP\`. \n\n*If you want to learn more about how properties and methods work, try \`XP.help.examples\`.');
       }
       else if (msgMatch[1] === 'github') {
-        if (msg.content.startsWith('XP.github.')) msg.reply('That is not an availible property for \`github\`');
-        else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`github\`');
+        if (msg.content.startsWith('XP.github.')) msg.reply('There are no availible properties for \`github\`.');
+        else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no methods for \`github\`.');
         else msg.reply('https://github.com/lectrician1/X-Plane-11')
       }
       else if (msgMatch[1] === 'add') {
@@ -101,8 +107,8 @@ client.on('message', msg => {
           else if (typeof msgMatch[3] !== 'undefined' && msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) {
             if (msgMatch[3].length > 2) {
               if (roles.has(msgMatch[3].slice(1, -1))) {
-                msg.member.addRole(roles.get(msgMatch[3].slice(1, -1)))
-                msg.reply(titleCase('The role ' + msgMatch[3].slice(1, -1)) + ' has been added to your user!')
+                msg.member.addRole(roles.get(msgMatch[3].slice(1, -1).toLowerCase()))
+                msg.reply('The role ' + titleCase(msgMatch[3].slice(1, -1))) + ' has been added to your user!')
               }
               else {
                 msg.reply('That role doesn\'t exist.')
@@ -112,11 +118,11 @@ client.on('message', msg => {
           }
         }
         else if (msg.content.startsWith('XP.add.')) msg.reply('The only availible property for \`add\` is \`role\`');
-        else if (typeof msgMatch[2] !== 'undefined' && msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('There are no selectors for \`add\`');
-        else msg.reply('You must use the property \`role\`for \`add\`');
+        else if (typeof msgMatch[2] !== 'undefined' && msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) msg.reply('There are no method for \`add\`');
+        else msg.reply('The only property \`add\` is \`role\`.');
       }
       else if (msg.content.startsWith('XP.')) msg.reply('The availible properties for \`XP\` are \`site\`, \`help\`, \`github\`, and \`add\`');
-      else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no selectors for \`XP\`');
+      else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no methods for \`XP\`');
     }
   }
   else if ((msg.channel.id === '515265124253040641' || msg.channel.id === '515265169581015061') && (typeof msg.attachments !== 'undefined' || typeof msg.embeds !== 'undefined')) {
