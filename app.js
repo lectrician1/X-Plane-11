@@ -63,7 +63,7 @@ client.on('message', msg => {
         }
         else if (msg.content.startsWith('XP.help.')) msg.reply('The only availible property for \`help\` is \`examples\`.');
         else if (typeof msgMatch[1] !== 'undefined' && msgMatch[1].startsWith('(') && msgMatch[1].endsWith(')')) msg.reply('There are no methods for \`help\`');
-        else msg.reply('**Hi!** :xp: I work in a system of properties and methods. The base property for me is \`XP\`. \n\nYou can find out **properties** of properties by typing the the \`.*\` property after the property you are looking for (e.g XP.* will give you all of the properties of \`XP\`. \nYou can find out **methods** of properties by indicating a method with no selectors ( \`()\` ) after the property you are looking for (e.g XP.() will give you all of the methods of \`XP\`. \n\n*If you want to learn more about how properties and methods work, try \`XP.help.examples\`.');
+        else msg.reply('**Hi!** :XP: I work in a system of properties and methods. The base property for me is \`XP\`. \n\nYou can find out **properties** of properties by typing the the \`.*\` property after the property you are looking for (e.g XP.* will give you all of the properties of \`XP\`. \nYou can find out **methods** of properties by indicating a method with no selectors ( \`()\` ) after the property you are looking for (e.g XP.() will give you all of the methods of \`XP\`. \n\n*If you want to learn more about how properties and methods work, try \`XP.help.examples\`.');
       }
       else if (msgMatch[1] === 'github') {
         if (msg.content.startsWith('XP.github.')) msg.reply('There are no availible properties for \`github\`.');
