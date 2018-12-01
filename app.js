@@ -36,7 +36,12 @@ client.on('message', msg => {
   if (msg.channel.id === '515579111939375114') {
     var msgMatch = msg.content.match(/\([^()]*\)|[^.]+(?=\([^()]*\))|[^.]+/g);
     if (msgMatch[0] === 'XP') {
-      if (msgMatch[1] === 'site') {
+      if (msgMatch[1] === 'ping') {
+        if (msg.content.startsWith('XP.ping.')) msg.reply('There are no properties for \`ping\`.');
+        else if (typeof msgMatch[3] !== 'undefined' && msgMatch[3].startsWith('(') && msgMatch[3].endsWith(')')) msg.reply('There are no methods for \`ping\`');
+        else msg.reply(client.ping);
+      }
+      else if (msgMatch[1] === 'site') {
         if (msg.content.startsWith('XP.site.')) msg.reply('There are no properties for \`site\`.');
         else if (msgMatch[2].startsWith('(') && msgMatch[2].endsWith(')')) {
           if (msgMatch[2] === '(blog)') {
